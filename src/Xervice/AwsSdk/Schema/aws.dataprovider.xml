@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+
+<DataProviders
+  xmlns="xervice:dataprovider-01"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="xervice:dataprovider-01 http://static.xervice.online/schema/dataprovider.schema.xsd"
+>
+
+    <DataProvider name="Ec2KeyPair">
+        <DataElement name="Name" type="string"/>
+        <DataElement name="DryRun" type="bool" default="false"/>
+    </DataProvider>
+
+    <DataProvider name="Ec2KeyPairResult">
+        <DataElement name="KeyFingerprint" type="string"/>
+        <DataElement name="KeyMaterial" type="string"/>
+        <DataElement name="KeyName" type="string"/>
+    </DataProvider>
+
+    <DataProvider name="Ec2SecurityGroup">
+        <DataElement name="DryRun" type="bool" default="false"/>
+        <DataElement name="Name" type="string"/>
+        <DataElement name="Description" default="''" type="string" />
+        <DataElement name="VpcId" allownull="true" type="string" />
+        <DataElement name="IpPermissions" type="Ec2SecurityGroupIpPermission[]"/>
+    </DataProvider>
+
+    <DataProvider name="Ec2SecurityGroupResult">
+        <DataElement name="GroupId" type="string"/>
+    </DataProvider>
+
+    <DataProvider name="Ec2SecurityGroupIpPermission">
+        <DataElement name="IpProtocol" type="string" default="tcp"/>
+        <DataElement name="FromPort" type="int"/>
+        <DataElement name="ToPort" type="int"/>
+        <DataElement name="IpRanges" type="Ec2SecurityGroupIpPermissionIpRange[]"/>
+    </DataProvider>
+
+    <DataProvider name="Ec2SecurityGroupIpPermissionIpRange">
+        <DataElement name="CidrIp" type="string" default="0.0.0.0/0"/>
+        <DataElement name="Description" type="string" default="''"/>
+    </DataProvider>
+
+    <DataProvider name="Ec2Instances">
+        <DataElement name="Instance" type="Ec2Instance[]"/>
+    </DataProvider>
+
+    <DataProvider name="Ec2Instance">
+        <DataElement name="ImageId" type="string"/>
+        <DataElement name="MinCount" type="int"/>
+        <DataElement name="MaxCount" type="int"/>
+        <DataElement name="InstanceType" type="string"/>
+        <DataElement name="KeyPair" type="Ec2KeyPair"/>
+        <DataElement name="SecurityGroups" type="Ec2SecurityGroup[]"/>
+    </DataProvider>
+
+
+    <DataProvider name="Ec2InstancesResult">
+        <DataElement name="Errors" type="Ec2InstancesErrorsResult[]"/>
+        <DataElement name="FleetId" type="string"/>
+        <DataElement name="Instances" type="Ec2InstancesInstancesResult[]"/>
+    </DataProvider>
+
+    <DataProvider name="Ec2InstancesErrorsResult">
+        <DataElement name="ErrorCode" type="string"/>
+        <DataElement name="ErrorMessage" type="string"/>
+    </DataProvider>
+
+    <DataProvider name="Ec2InstancesInstancesResult">
+        <DataElement name="InstanceIds" type="array"/>
+        <DataElement name="InstanceType" type="string"/>
+        <DataElement name="Platform" type="string"/>
+    </DataProvider>
+
+    <DataProvider name="Ec2DescribeInstances">
+        <DataElement name="DryRun" type="bool" default="false"/>
+        <DataElement name="InstanceIds" type="array"/>
+    </DataProvider>
+
+    <DataProvider name="Ec2DescribeInstancesResult">
+        <DataElement name="NextToken" type="string"/>
+        <DataElement name="Reservations" type="Ec2DescribeInstancesReservationsResult[]"/>
+    </DataProvider>
+
+    <DataProvider name="Ec2DescribeInstancesReservationsResult">
+        <DataElement name="Groups" type="Ec2DescribeInstancesGroups[]"/>
+        <DataElement name="Instances" type="Ec2DescribeInstancesInstance[]"/>
+    </DataProvider>
+
+    <DataProvider name="Ec2DescribeInstancesGroups">
+        <DataElement name="GroupId" type="string"/>
+        <DataElement name="GroupName" type="string"/>
+    </DataProvider>
+
+    <DataProvider name="Ec2DescribeInstancesInstance">
+        <DataElement name="AmiLaunchIndex" type="int"/>
+        <DataElement name="Architecture" type="string"/>
+        <DataElement name="CapacityReservationId" type="string"/>
+        <DataElement name="ClientToken" type="string"/>
+        <DataElement name="ImageId" type="string"/>
+        <DataElement name="InstanceId" type="string"/>
+        <DataElement name="InstanceLifecycle" type="string"/>
+        <DataElement name="InstanceType" type="string"/>
+        <DataElement name="KernelId" type="string"/>
+        <DataElement name="KeyName" type="string"/>
+        <DataElement name="OwnerId" type="string"/>
+        <DataElement name="RequesterId" type="string"/>
+        <DataElement name="ReservationId" type="string"/>
+        <DataElement name="Platform" type="string"/>
+        <DataElement name="PrivateDnsName" type="string"/>
+        <DataElement name="PrivateIpAddress" type="string"/>
+        <DataElement name="PublicDnsName" type="string"/>
+        <DataElement name="PublicIpAddress" type="string"/>
+        <DataElement name="VpcId" type="string"/>
+    </DataProvider>
+    
+</DataProviders>
